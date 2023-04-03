@@ -1,46 +1,31 @@
-# Getting Started with Create React App
+🚀 Bliss Applications Recruitment Challenge - Frontend 🚀
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This repository contains the solution to the Bliss Applications Recruitment Challenge for the Frontend position. The application was developed using React and implements the functional and non-functional requirements specified in the challenge.
 
-## Available Scripts
+🎨 UI Requirements 🎨
 
-In the project directory, you can run:
+The application has a simple user interface that allows users to browse and search through a list of questions. The list is fetched from the API and displayed in the application. The user can filter the results using a search box, which triggers a call to the appropriate endpoint on the API.
 
-### `npm start`
+When the user selects a question from the list, the application displays the details of the question on a separate screen. The user can also vote on a particular answer using a button provided on the detail screen.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+💻 Functional Requirements 💻
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+🔹 Loading Screen:
+The application shows a loading screen while the server health is checked. If the server health is OK, then the application should proceed to the "List Screen." If the server health is NOT OK, then the application should display a "Retry Action" widget.
 
-### `npm test`
+🔹 Questions List Screen:
+The frontend application must show the List Screen in two cases: the loading screen managed to contact and check the server health or the app was opened with an URL with the format. The app should fetch 10 records at a time. The list will follow the order returned from the API. The app should start loading 10 additional records if the user shows intent to browse additional records. The app should present a search box at the top of the list that allows the user to filter the results. Results should be shown on the same screen as a list. Searching implies hitting the appropriate endpoint and this variation must comply with the 2 requirements defined above. If a search result is being shown (empty or not), the user must be allowed to share this with other users via the "Share Screen". The app must send an appropriate URL that, when opened, drives the user to the appropriate screen. The app must present a dismiss button to get out of the Search variant. Each list element is selectable, and whenever the user selects one record, the app must show the "Detail Screen."
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+🔹 Detail Screen:
+The frontend application must show the detail screen in two cases: a row was selected in "List Screen" or the application was opened with the detail screen URL from outside the app. The "Detail Screen" must allow the user to navigate back to the listing. The "Detail Screen" must convey all the information of the object using appropriate visualization widgets. The "Detail Screen" must allow the user to share this content with other users via the "Share Screen". The app must send an appropriate URL that, when opened, drives the user to the appropriate screen. The "Detail Screen" must allow the user to vote on a particular answer via the use of a button. This should trigger an appropriate call to the API endpoint devoted to updating Questions.
 
-### `npm run build`
+🔹 Share Screen:
+This screen must allow the users to share this content with others via email. The sharing mechanism should invoke the appropriate service on the back-end.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+🔹 No Connectivity Screen:
+The app must monitor connectivity with the Internet and show an appropriate screen whenever the connection is lost. This screen should remain visible as long as the device has no connection to the Internet. When a connection is regained, then the user should be at the state where it was before.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+🚧 Non-Functional Requirements 🚧
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+🔸 Languages, Platform Targets, IDEs, Dependency Managers:
+The frontend application must be developed using Javascript/CSS/HTML and node LTS. The application uses React and implements ES6+. The application is compatible with the latest version of Chrome and uses npm/yarn
