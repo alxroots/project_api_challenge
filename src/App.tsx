@@ -1,26 +1,57 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { QuestionsListScreen } from 'components/QuestionsListScreen';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import './styles/global.css';
+import { LoadingScreen } from 'components/LoadingScreen';
+import { RetryAction } from 'components/RetryAction';
+import { useHealthCheck } from 'services/useApi';
+import { DetailScreen } from 'components/DetailScreen';
+import { useEffect, useState } from 'react';
+import { NoConnectivityScreen } from 'components/NoConnectivityScreen';
 
-function App() {
+function AppContent({ status, refetch }: { status: string, refetch: () => void }) {
+  const [isOnline, setIsOnline] = useState<boolean>(true);
+
+  useEffect(() => {
+    const handleOnlineStatus = () => setIsOnline(true);
+    const handleOfflineStatus = () => setIsOnline(false);
+
+    window.addEventListener('online', handleOnlineStatus);
+    window.addEventListener('offline', handleOfflineStatus);
+
+    return () => {
+      window.removeEventListener('online', handleOnlineStatus);
+      window.removeEventListener('offline', handleOfflineStatus);
+    };
+  }, []);
+
+  const handleRetry = () => {
+    refetch();
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      {!isOnline && <NoConnectivityScreen />}
+      {isOnline && (
+        status === 'loading' ? <LoadingScreen /> :
+          status === 'success' ? (
+            <BrowserRouter>
+              <Routes>
+                <Route path="/" element={<QuestionsListScreen />} />
+                <Route path="/questions/:id" element={<DetailScreen />} />
+              </Routes>
+            </BrowserRouter>
+          ) : <RetryAction onRetry={handleRetry} />
+      )}
+    </>
   );
 }
 
-export default App;
+export function App() {
+  const { status, refetch } = useHealthCheck();
+
+  return (
+    <div>
+      <AppContent status={status} refetch={refetch} />
+    </div>
+  );
+}
