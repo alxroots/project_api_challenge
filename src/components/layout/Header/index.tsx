@@ -5,8 +5,26 @@
  * - Can be reused across multiple screens of the app.
  */
 
-export function Header(){
+import { Flex, Box, Text } from "@chakra-ui/react";
+import styled from "styled-components";
+
+const HeaderContainer = styled(Box)`
+  background-color: #319795;
+  color: #fff;
+`;
+
+const Logo = styled(Text)`
+  font-size: 2rem;
+  font-weight: bold;
+  text-transform: uppercase;
+`;
+
+export function Header() {
   return (
-    <>HEADER</>
-  )
+    <HeaderContainer py={4} px={6}>
+      <Flex alignItems="center" justifyContent="space-between">
+        <Logo>My Awesome App</Logo>
+      </Flex>
+    </HeaderContainer>
+  );
 }

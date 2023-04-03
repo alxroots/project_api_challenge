@@ -7,6 +7,7 @@ import { useHealthCheck } from 'services/useApi';
 import { DetailScreen } from 'components/DetailScreen';
 import { useEffect, useState } from 'react';
 import { NoConnectivityScreen } from 'components/NoConnectivityScreen';
+import { Header } from 'components/layout/Header';
 
 function AppContent({ status, refetch }: { status: string, refetch: () => void }) {
   const [isOnline, setIsOnline] = useState<boolean>(true);
@@ -51,6 +52,7 @@ export function App() {
 
   return (
     <div>
+      <Header />
       <AppContent status={status} refetch={refetch} />
     </div>
   );
